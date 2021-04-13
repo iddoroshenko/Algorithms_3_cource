@@ -19,7 +19,8 @@ def search(text, pattern):
         prime_number_step *= prime_number
 
     for i in range(0, text_size - pattern_size + 1):
-        if text_hash == pattern_hash:
+        # the slice could be replaces with a loop
+        if text_hash == pattern_hash and text[i:i+pattern_size] == pattern:
             return i
         if i != text_size - pattern_size:
             text_hash = (text_hash - ord(text[i])) / prime_number
