@@ -8,15 +8,26 @@ import time
 
 def test_string_search_algorithm(text, pattern):
     start = time.time()
-
     print(native.search(text, pattern))
-    #print(rabin_karp.search(text, pattern))
-    print(boyer_moore.search(text, pattern))
-    print(knuth_morris_pratt.search(text, pattern))
-    print(aho_corasick.search(text, pattern))
-
     stop = time.time()
-    return stop - start
+    print('native:', stop - start)
+    start = time.time()
+    #print(rabin_karp.search(text, pattern))
+    stop = time.time()
+    print('rabin_karp:', stop - start)
+    start = time.time()
+    print(boyer_moore.search(text, pattern))
+    stop = time.time()
+    print('boyer_moore:', stop - start)
+    start = time.time()
+    print(knuth_morris_pratt.search(text, pattern))
+    stop = time.time()
+    print('knuth_morris_pratt:', stop - start)
+    start = time.time()
+    print(aho_corasick.search(text, pattern))
+    stop = time.time()
+    print('aho_corasick:', stop - start)
+
 
 
 if __name__ == '__main__':
@@ -43,13 +54,26 @@ if __name__ == '__main__':
 
     f_text = open("benchmarks/bad_t_1.txt", "r")
     f_pattern = open("benchmarks/bad_w_1.txt", "r")
-    print(test_string_search_algorithm(f_text.read(), f_pattern.read()))
+    test_string_search_algorithm(f_text.read(), f_pattern.read())
     f_text = open("benchmarks/bad_t_2.txt", "r")
     f_pattern = open("benchmarks/bad_w_2.txt", "r")
-    print(test_string_search_algorithm(f_text.read(), f_pattern.read()))
+    test_string_search_algorithm(f_text.read(), f_pattern.read())
     f_text = open("benchmarks/bad_t_3.txt", "r")
     f_pattern = open("benchmarks/bad_w_3.txt", "r")
-    print(test_string_search_algorithm(f_text.read(), f_pattern.read()))
+    test_string_search_algorithm(f_text.read(), f_pattern.read())
     f_text = open("benchmarks/bad_t_4.txt", "r")
     f_pattern = open("benchmarks/bad_w_4.txt", "r")
-    print(test_string_search_algorithm(f_text.read(), f_pattern.read()))
+    test_string_search_algorithm(f_text.read(), f_pattern.read())
+
+    f_text = open("benchmarks/good_t_1.txt", "r")
+    f_pattern = open("benchmarks/good_w_1.txt", "r")
+    test_string_search_algorithm(f_text.read(), f_pattern.read())
+    f_text = open("benchmarks/good_t_2.txt", "r")
+    f_pattern = open("benchmarks/good_w_2.txt", "r")
+    test_string_search_algorithm(f_text.read(), f_pattern.read())
+    f_text = open("benchmarks/good_t_3.txt", "r")
+    f_pattern = open("benchmarks/good_w_3.txt", "r")
+    test_string_search_algorithm(f_text.read(), f_pattern.read())
+    f_text = open("benchmarks/good_t_4.txt", "r")
+    f_pattern = open("benchmarks/good_w_4.txt", "r")
+    test_string_search_algorithm(f_text.read(), f_pattern.read())
