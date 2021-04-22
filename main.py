@@ -3,6 +3,21 @@ import search_string.rabin_karp as rabin_karp
 import search_string.boyer_moore as boyer_moore
 import search_string.knuth_morris_pratt as knuth_morris_pratt
 import search_string.aho_corasick as aho_corasick
+import time
+
+
+def test_string_search_algorithm(text, pattern):
+    start = time.time()
+
+    print(native.search(text, pattern))
+    #print(rabin_karp.search(text, pattern))
+    print(boyer_moore.search(text, pattern))
+    print(knuth_morris_pratt.search(text, pattern))
+    print(aho_corasick.search(text, pattern))
+
+    stop = time.time()
+    return stop - start
+
 
 if __name__ == '__main__':
     print('Hi Anya and Sasha')
@@ -26,3 +41,15 @@ if __name__ == '__main__':
     b.set_links()
     print(b.search('abacba'))
 
+    f_text = open("benchmarks/bad_t_1.txt", "r")
+    f_pattern = open("benchmarks/bad_w_1.txt", "r")
+    print(test_string_search_algorithm(f_text.read(), f_pattern.read()))
+    f_text = open("benchmarks/bad_t_2.txt", "r")
+    f_pattern = open("benchmarks/bad_w_2.txt", "r")
+    print(test_string_search_algorithm(f_text.read(), f_pattern.read()))
+    f_text = open("benchmarks/bad_t_3.txt", "r")
+    f_pattern = open("benchmarks/bad_w_3.txt", "r")
+    print(test_string_search_algorithm(f_text.read(), f_pattern.read()))
+    f_text = open("benchmarks/bad_t_4.txt", "r")
+    f_pattern = open("benchmarks/bad_w_4.txt", "r")
+    print(test_string_search_algorithm(f_text.read(), f_pattern.read()))

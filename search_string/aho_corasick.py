@@ -7,6 +7,20 @@ class Node:
         self.char = ''
 
 
+def search(text, pattern):
+    text_size = len(text)
+    pattern_size = len(pattern)
+    if pattern_size == 0:
+        return 0
+    if text_size == 0 or pattern_size > text_size:
+        return -1
+    a = AhoKorasick()
+    a.add_pattern(pattern=pattern)
+    a.set_links()
+    e = a.search(text)[0][1]
+    return e
+
+
 class AhoKorasick:
 
     def __init__(self):
@@ -64,15 +78,19 @@ class AhoKorasick:
         text_size = len(text)
         if text_size == 0:
             return -1
-        ans = set()
+        ans = []
         v = 0
         i = 0
-        while i != text_size:
+        while True:
             if self.nodes[v].leaf != -1:
-                ans.add((self.patterns[self.nodes[v].leaf], i - len(self.patterns[self.nodes[v].leaf])))
+                ans.append((self.patterns[self.nodes[v].leaf], i - len(self.patterns[self.nodes[v].leaf])))
 
             if self.nodes[self.nodes[v].link].leaf != -1:
-                ans.add((self.patterns[self.nodes[self.nodes[v].link].leaf], i - len(self.patterns[self.nodes[self.nodes[v].link].leaf])))
+                ans.append((self.patterns[self.nodes[self.nodes[v].link].leaf],
+                         i - len(self.patterns[self.nodes[self.nodes[v].link].leaf])))
+
+            if i == text_size:
+                break
 
             next_step = -1
             for x in self.nodes[v].edges:
