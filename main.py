@@ -2,6 +2,7 @@ import search_string.native as native
 import search_string.rabin_karp as rabin_karp
 import search_string.boyer_moore as boyer_moore
 import search_string.knuth_morris_pratt as knuth_morris_pratt
+import search_string.aho_corasick as aho_corasick
 
 if __name__ == '__main__':
     print('Hi Anya and Sasha')
@@ -9,3 +10,19 @@ if __name__ == '__main__':
     print(rabin_karp.search("qwerty", "ert"))
     print(boyer_moore.search("qwerty", "ert"))
     print(knuth_morris_pratt.search("qwerty", "ert"))
+    a = aho_corasick.AhoKorasick()
+    a.add_pattern(pattern='acc')
+    a.add_pattern(pattern='atc')
+    a.add_pattern(pattern='cat')
+    a.add_pattern(pattern='gcg')
+    a.set_links()
+    print(a.search('gcatcg'))
+
+    b = aho_corasick.AhoKorasick()
+    b.add_pattern(pattern='a')
+    b.add_pattern(pattern='ab')
+    b.add_pattern(pattern='bc')
+    b.add_pattern(pattern='c')
+    b.set_links()
+    print(b.search('abacba'))
+
