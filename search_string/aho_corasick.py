@@ -1,3 +1,6 @@
+cmp_count = 0
+
+
 class Node:
     def __init__(self):
         self.edges = []
@@ -8,17 +11,19 @@ class Node:
 
 
 def search(text, pattern):
+    global cmp_count
+    cmp_count = 0
     text_size = len(text)
     pattern_size = len(pattern)
     if pattern_size == 0:
-        return 0
+        return (0, cmp_count)
     if text_size == 0 or pattern_size > text_size:
-        return -1
+        return (-1, cmp_count)
     a = AhoKorasick()
     a.add_pattern(pattern=pattern)
     a.set_links()
     e = a.search(text)[0][1]
-    return e
+    return (e, cmp_count)
 
 
 class AhoKorasick:
@@ -75,6 +80,7 @@ class AhoKorasick:
                 queue.append(x)
 
     def search(self, text):
+        global cmp_count
         text_size = len(text)
         if text_size == 0:
             return -1
@@ -94,6 +100,7 @@ class AhoKorasick:
 
             next_step = -1
             for x in self.nodes[v].edges:
+                cmp_count += 1
                 if text[i] == self.nodes[x].char:
                     next_step = x
                     break
