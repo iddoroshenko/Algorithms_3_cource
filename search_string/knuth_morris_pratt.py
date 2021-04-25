@@ -8,20 +8,17 @@ def search(text, pattern):
         return (-1, cmp_count)
 
     def compute_prefix_function():
-        tmp = 0
         prefix_function = [0 for x in range(text_size)]
         for i in range(1, text_size):
             j = prefix_function[i-1]
             while j > 0 and text[i] != text[j]:
-                tmp += 1
                 j = prefix_function[j-1]
-            tmp += 2
             if text[i] == text[j]:
                 j += 1
             prefix_function[i] = j
-        return prefix_function, tmp
+        return prefix_function
 
-    prefix_function, cmp_count = compute_prefix_function()
+    prefix_function = compute_prefix_function()
     i = 0
     j = 0
     while j != text_size - pattern_size + 1:
