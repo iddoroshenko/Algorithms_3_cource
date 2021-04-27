@@ -14,5 +14,5 @@ def search(text, pattern):
                 isEqual = False
                 break
         if isEqual:
-            return (i, cmp_count)
-    return (-1, cmp_count)
+            return i, cmp_count
+    return -1, cmp_count
