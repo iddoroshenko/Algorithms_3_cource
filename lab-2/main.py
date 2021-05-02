@@ -86,7 +86,6 @@ def test(test_num):
 
 
 if __name__ == '__main__':
-    print('H', 'i', ' ', 'S', 'a', 's', 'h', 'a', ' ', 'a', 'n', 'd', ' ', 'A', 'n', 'y', 'a', sep='')
     p_c = []
     p_p = []
     p_s = []
