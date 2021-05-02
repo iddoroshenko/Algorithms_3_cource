@@ -4,7 +4,8 @@ import knapsack.ptas as ptas
 import knapsack.two_approx as two_approx
 import knapsack.fptas as fptas
 import knapsack.branch_and_bound as branch_and_bound
-
+import time
+TRY = 100
 
 def test(test_num):
     w = int(p_c[test_num].read())
@@ -27,12 +28,61 @@ def test(test_num):
             c_true += items_c[j]
 
     print("true result:", (c_true, w_true, items_true))
-    print("dp_by_weight:", dp_by_weight.get_ans(w, items_c, items_w))
-    print("dp_by_cost:", dp_by_cost.get_ans(w, items_c, items_w))
-    print("ptas:", ptas.get_ans(w, items_c, items_w))
-    print("2_approx:", two_approx.get_ans(w, items_c, items_w))
-    print("fptas:", fptas.get_ans(w, items_c, items_w))
-    print("branch_and_bound:", branch_and_bound.get_ans(w, items_c, items_w))
+
+    time_ = 0
+    for tries in range(TRY):
+        start = time.time()
+        res = dp_by_weight.get_ans(w, items_c, items_w)
+        stop = time.time()
+        time_ += stop - start
+    print("dp_by_weight\nans:", res[0], "number of comparisons:", res[1])
+    print('Time:', time_/TRY)
+
+    time_ = 0
+    for tries in range(TRY):
+        start = time.time()
+        res = dp_by_cost.get_ans(w, items_c, items_w)
+        stop = time.time()
+        time_ += stop - start
+    print("dp_by_cost\nans:", res[0], "number of comparisons:", res[1])
+    print('Time:', time_/TRY)
+
+
+    time_ = 0
+    for tries in range(TRY):
+        start = time.time()
+        res = ptas.get_ans(w, items_c, items_w)
+        stop = time.time()
+        time_ += stop - start
+    print("ptas\nans:", res[0], "number of comparisons:", res[1])
+    print('Time:', time_/TRY)
+
+    time_ = 0
+    for tries in range(TRY):
+        start = time.time()
+        res = two_approx.get_ans(w, items_c, items_w)
+        stop = time.time()
+        time_ += stop - start
+    print("2_approx\nans:", res[0], "number of comparisons:", res[1])
+    print('Time:', time_/TRY)
+
+    time_ = 0
+    for tries in range(TRY):
+        start = time.time()
+        res = fptas.get_ans(w, items_c, items_w)
+        stop = time.time()
+        time_ += stop - start
+    print("fptas\nans:", res[0], "number of comparisons:", res[1])
+    print('Time:', time_/TRY)
+
+    time_ = 0
+    for tries in range(TRY):
+        start = time.time()
+        res = branch_and_bound.get_ans(w, items_c, items_w)
+        stop = time.time()
+        time_ += stop - start
+    print("branch_and_bound\nans:", res[0], "number of comparisons:", res[1])
+    print('Time:', time_/TRY)
 
 
 if __name__ == '__main__':

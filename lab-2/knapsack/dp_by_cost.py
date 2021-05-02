@@ -1,5 +1,6 @@
 import scipy
 def get_ans(w, items_c, items_w):
+    cnt_cmp = 0
     n = len(items_c)
     C = sum(items_c)
     dp = []
@@ -8,6 +9,7 @@ def get_ans(w, items_c, items_w):
     dp[0][0] = 0
     for j in range(1, n + 1):
         for k in range(1, C + 1):
+            cnt_cmp += 1
             if k < items_c[j - 1]:
                 dp[j][k] = dp[j - 1][k]
             else:
@@ -18,8 +20,11 @@ def get_ans(w, items_c, items_w):
     final_weight = [0]
 
     def get_items(k, s):
+        nonlocal cnt_cmp
+        cnt_cmp += 1
         if dp[k][s] == 0:
             return
+        cnt_cmp += 1
         if dp[k - 1][s] == dp[k][s]:
             get_items(k - 1, s)
         else:
@@ -29,9 +34,10 @@ def get_ans(w, items_c, items_w):
 
     best_c = -1
     for i in range(C, -1, -1):
+        cnt_cmp += 1
         if dp[n][i] < w + 1:
             best_c = i
             break
     get_items(n, best_c)
 
-    return best_c, final_weight[0], items
+    return best_c, final_weight[0], items, cnt_cmp

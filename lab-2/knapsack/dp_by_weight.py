@@ -1,10 +1,12 @@
 def get_ans(w, items_c, items_w):
+    cnt_cmp = 0
     n = len(items_c)
     dp = []
     for i in range(n + 1):
         dp.append([0] * (w + 1))
     for i in range(1, n + 1):
         for k in range(1, w + 1):
+            cnt_cmp += 1
             if k < items_w[i - 1]:
                 dp[i][k] = dp[i - 1][k]
             else:
@@ -13,8 +15,11 @@ def get_ans(w, items_c, items_w):
     final_weight = [0]
 
     def get_items(k, s):
+        nonlocal cnt_cmp
+        cnt_cmp += 1
         if dp[k][s] == 0:
             return
+        cnt_cmp += 1
         if dp[k - 1][s] == dp[k][s]:
             get_items(k - 1, s)
         else:
@@ -23,4 +28,4 @@ def get_ans(w, items_c, items_w):
             final_weight[0] += items_w[k - 1]
 
     get_items(n, w)
-    return dp[n][w], final_weight[0], items
+    return dp[n][w], final_weight[0], items, cnt_cmp
