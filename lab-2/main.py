@@ -5,7 +5,7 @@ import knapsack.two_approx as two_approx
 import knapsack.fptas as fptas
 import knapsack.branch_and_bound as branch_and_bound
 import time
-TRY = 100
+TRY = 10
 
 def test(test_num):
     w = int(p_c[test_num].read())
@@ -35,7 +35,7 @@ def test(test_num):
         res = dp_by_weight.get_ans(w, items_c, items_w)
         stop = time.time()
         time_ += stop - start
-    print("dp_by_weight\nans:", res[0], "number of comparisons:", res[1])
+    print("dp_by_weight\nans:", res[:3], "number of comparisons:", res[3])
     print('Time:', time_/TRY)
 
     time_ = 0
@@ -44,7 +44,7 @@ def test(test_num):
         res = dp_by_cost.get_ans(w, items_c, items_w)
         stop = time.time()
         time_ += stop - start
-    print("dp_by_cost\nans:", res[0], "number of comparisons:", res[1])
+    print("dp_by_cost\nans:", res[:3], "number of comparisons:", res[3])
     print('Time:', time_/TRY)
 
 
@@ -54,7 +54,7 @@ def test(test_num):
         res = ptas.get_ans(w, items_c, items_w)
         stop = time.time()
         time_ += stop - start
-    print("ptas\nans:", res[0], "number of comparisons:", res[1])
+    print("ptas\nans:", res[:3], "number of comparisons:", res[3])
     print('Time:', time_/TRY)
 
     time_ = 0
@@ -63,7 +63,7 @@ def test(test_num):
         res = two_approx.get_ans(w, items_c, items_w)
         stop = time.time()
         time_ += stop - start
-    print("2_approx\nans:", res[0], "number of comparisons:", res[1])
+    print("2_approx\nans:", res[:3], "number of comparisons:", res[3])
     print('Time:', time_/TRY)
 
     time_ = 0
@@ -72,7 +72,7 @@ def test(test_num):
         res = fptas.get_ans(w, items_c, items_w)
         stop = time.time()
         time_ += stop - start
-    print("fptas\nans:", res[0], "number of comparisons:", res[1])
+    print("fptas\nans:", res[:3], "number of comparisons:", res[3])
     print('Time:', time_/TRY)
 
     time_ = 0
@@ -81,7 +81,7 @@ def test(test_num):
         res = branch_and_bound.get_ans(w, items_c, items_w)
         stop = time.time()
         time_ += stop - start
-    print("branch_and_bound\nans:", res[0], "number of comparisons:", res[1])
+    print("branch_and_bound\nans:", res[:3], "number of comparisons:", res[3])
     print('Time:', time_/TRY)
 
 
