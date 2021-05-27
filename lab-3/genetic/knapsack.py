@@ -19,7 +19,7 @@ def remove_random_item(chromosome):
 
 
 def get_ans(w, items_c, items_w):
-    num_of_chromosomes = 4000
+    num_of_chromosomes = 100
     k = num_of_chromosomes // 4
     k = k // 2
     k *= 2

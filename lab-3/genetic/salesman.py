@@ -10,7 +10,7 @@ def fitness_function(chromosome, edges_weight):
 
 def get_ans(edges_weight):
     num_of_edges = len(edges_weight)
-    num_of_chromosomes = 4000
+    num_of_chromosomes = 1000
     k = num_of_chromosomes // 4
     k = k // 4
     k *= 4
