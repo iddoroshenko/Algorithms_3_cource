@@ -1,5 +1,6 @@
 import search.two_opt as two_opt
 import search.iterated_local as iterated_local
+import time
 
 
 def read_file(name):
@@ -21,23 +22,53 @@ def read_file(name):
             flows[i - n - 1].append(int(line[j]))
     return dist, flows
 
+
 if __name__ == '__main__':
     file = open('../lab-3/the_most_important_file_do_not_remove.txt', 'r')
     print(file.read())
 
-    dist, flows = read_file('benchmarks/tai20a')
-    print(two_opt.get_ans(dist, flows))
-    print(iterated_local.get_ans(dist, flows))
+    data = {
+        'tai20a': read_file('benchmarks/tai20a'),
+        'tai40a': read_file('benchmarks/tai40a'),
+        'tai60a': read_file('benchmarks/tai60a'),
+        'tai80a': read_file('benchmarks/tai80a'),
+        'tai100a': read_file('benchmarks/tai100a'),
+    }
+    for filename in data:
+        print(filename)
+        results_two_opt = []
+        time_executed = 0
+        for i in range(100):
+            start_time = time.time()
+            results_two_opt.append(two_opt.get_ans(*data[filename]))
+            time_executed += time.time() - start_time
+        print('TWO OPT')
+        print(f'TIME: {time_executed/100}')
+        best_result = sorted(results_two_opt, key=lambda x: x[1])[0]
+        print(f'BEST RESULT: {best_result[1]}')
+        print(f'ANSWER: {best_result[0]}')
 
-    dist, flows = read_file('benchmarks/tai40a')
-    print(two_opt.get_ans(dist, flows))
-    print(iterated_local.get_ans(dist, flows))
-    dist, flows = read_file('benchmarks/tai60a')
-    print(two_opt.get_ans(dist, flows))
-    print(iterated_local.get_ans(dist, flows))
-    dist, flows = read_file('benchmarks/tai80a')
-    print(two_opt.get_ans(dist, flows))
-    print(iterated_local.get_ans(dist, flows))
-    dist, flows = read_file('benchmarks/tai100a')
-    print(two_opt.get_ans(dist, flows))
-    print(iterated_local.get_ans(dist, flows))
+        file = open(f'answers/two_opt/{filename}.sol', 'w')
+        file.write(' '.join(list(map(str, best_result[0]))))
+
+
+        print()
+
+        results_iterated_local = []
+        time_executed = 0
+        for i in range(100):
+            start_time = time.time()
+            results_iterated_local.append(iterated_local.get_ans(*data[filename]))
+            time_executed += time.time() - start_time
+        print('ITERATED LOCAL')
+        print(f'TIME: {time_executed / 100}')
+        best_result = sorted(results_iterated_local, key=lambda x: x[1])[0]
+        print(f'BEST RESULT: {best_result[1]}')
+        print(f'ANSWER: {best_result[0]}')
+
+        file = open(f'answers/iterated_local/{filename}.sol', 'w')
+        file.write(' '.join(list(map(str, best_result[0]))))
+
+        print('-----------------------------------------------')
+
+

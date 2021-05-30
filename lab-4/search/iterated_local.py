@@ -11,8 +11,8 @@ def get_ans(dists, flows):
     count = 0
     n = len(dists)
     k = n // 2
-    i = random.randint(0, n-1)
-    j = max(i + random.randint(1, k), n)
+    i = random.randint(0, n-2)
+    j = max(i + random.randint(1, k), n-1)
     while count < 100:
         count += 1
         tmp_ans = stochastic_two_opt(ans, i, j)
