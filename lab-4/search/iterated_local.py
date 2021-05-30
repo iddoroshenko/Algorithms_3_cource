@@ -1,8 +1,12 @@
 import random
 from .two_opt import local_search, init_base
 
+
 def stochastic_two_opt(ans, i, j):
-    new_ans = ans[:i] + ans[j:i-1:-1] + ans[j+1:]
+    if i == 0:
+        new_ans = ans[:i] + ans[j::-1] + ans[j+1:]
+    else:
+        new_ans = ans[:i] + ans[j:i-1:-1] + ans[j+1:]
     return new_ans
 
 
