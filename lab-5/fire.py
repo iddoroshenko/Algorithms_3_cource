@@ -38,10 +38,9 @@ def fitness(cells_machines, cells_details, a, num_of_cells):
 def single_move(current_solve, a, num_of_cells):
     n = len(a[0])  # число деталей
     cells_details = current_solve[1].copy()
-    cells_machine = current_solve[2].copy()
-    best_f = current_solve[0]
-    best_cells_details = current_solve[1].copy()
-    best_cells_machine = current_solve[2].copy()
+    best_f = -9999
+    best_cells_details = []
+    best_cells_machine = []
     detail_to_move = random.randint(0, n - 1)
     old_cell = 0
     for i in range(len(cells_details)):
