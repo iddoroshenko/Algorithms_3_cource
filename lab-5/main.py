@@ -13,10 +13,17 @@ def parse_file(s):
     return a
 
 
-def get_line_from_lists(lst):
+def get_line_from_lists(lst, filename):
     line = ''
-    for l in lst:
-        line += '[' + ' '.join(list(map(str, l))) + ']'
+    for i in range(int(filename[3:])):
+        for l in range(len(lst[2])):
+            if i in lst[2][l]:
+                line += str(l + 1) + ' '
+    line += '\n'
+    for i in range(int(filename[:2])):
+        for l in range(len(lst[1])):
+            if i in lst[1][l]:
+                line += str(l + 1) + ' '
     return line
 
 
@@ -31,6 +38,5 @@ if __name__ == '__main__':
             total_time += time.time() - start
         print(f'FILE: {i} - TIME: {total_time/10}')
         answers = sorted(answers, key=lambda x: x[0], reverse=True)
-        file.write(get_line_from_lists(answers[0][1]) + '\n')
-        file.write(get_line_from_lists(answers[0][2]))
+        file.write(get_line_from_lists(answers[0], i))
 
